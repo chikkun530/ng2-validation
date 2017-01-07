@@ -11,7 +11,7 @@ export class CustomValidators {
       if (isPresent(Validators.required(control))) return null;
 
       let v: string = control.value;
-      return v.length >= rangeLength[0] && v.length <= rangeLength[1] ? null : {'rangeLength': true};
+      return v.length >= rangeLength[0] && v.length <= rangeLength[1] ? null : {'rangeLength': true, 'from': rangeLength[0], 'to': rangeLength[1]};
     };
   }
 
@@ -23,7 +23,7 @@ export class CustomValidators {
       if (isPresent(Validators.required(control))) return null;
 
       let v: number = control.value;
-      return v >= min ? null : {'min': true};
+      return v >= min ? null : {'min': {'actualValue': v, 'requiredMin': min}};
     };
   }
 
@@ -35,7 +35,7 @@ export class CustomValidators {
       if (isPresent(Validators.required(control))) return null;
 
       let v: number = control.value;
-      return v <= max ? null : {'max': true};
+      return v <= max ? null : {'max': {'actualValue': v, 'requiredMax': max}};
     };
   }
 
@@ -47,7 +47,7 @@ export class CustomValidators {
       if (isPresent(Validators.required(control))) return null;
 
       let v: number = control.value;
-      return v >= range[0] && v <= range[1] ? null : {'range': true};
+      return v >= range[0] && v <= range[1] ? null : {'range': {'from': range[0], 'to': range[1]}};
     };
   }
 
